@@ -9,6 +9,14 @@ const ld PI =  3.141592653589793238L;
 const ll N=1000002;
 using namespace std;
 
+/**
+*The first answer should be the total weight of the MST of the graph.
+*Then the second one should be the total weight of the second to lowest MST,
+*which should have atleast one edge that doesn't exist in the first MST.
+*So I looped over the edges that I didn't choose for the first MST, and each time, began first by adding this edge, and then doing the regular MST algorithm.
+*And if the result is a tree(not a forest) I take the answer and finally take the minimum of those.
+*/
+
 ll n,m;
 ll sz[100],rep[100];
 vector<pair<ll,pair<ll,ll> > >edges;
