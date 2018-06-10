@@ -12,6 +12,8 @@ using namespace std;
 /**
 *I just calculated the expected maximum by summing from i=1 to m the term:
 * ( i*(i^n - (i-1)^n) ) / m^n
+*
+* Editorial: http://codeforces.com/blog/entry/13190
 */
 
 ld power(ld x,ll n){
