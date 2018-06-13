@@ -11,6 +11,7 @@ using namespace std;
 
 /**
 * I used DSU to link every pair of rings that overlap in two points, then printed the maximum value in the "sz" array.
+* For two rings to overlap, the need to not be completely disjoint(or tangent) and one mustn't be inside another.
 */
 
 ll rep[100],sz[100];
