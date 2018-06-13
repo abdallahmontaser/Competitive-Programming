@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+#define MOD 1000000007
+#define ll long long
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define endl '\n'
+const ld PI =  3.141592653589793238L;
+const ll N=100002;
+using namespace std;
+
+/**
+* Editorial: http://codeforces.com/blog/entry/9704
+*/
+
+int n,k;
+int a[100],b[100];
+int dp[101][2][N];
+
+int main(){
+   ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+   // <<>>
+
+   cin >> n >> k;
+   for(int i=0;i!=n;++i) cin >> a[i];
+   for(int i=0;i!=n;++i) cin >> b[i];
+
+   for(int x=0;x<N;++x) dp[0][0][x] = -1e9;
+   for(int x=0;x<N;++x) dp[0][1][x] = -1e9;
+
+   dp[0][0][0]=0;
+   for(int i=0;i!=n;++i){
+      for(int x=-(N-1);x<=N-1;++x) dp[i+1][(x<0)][abs(x)] = dp[i][(x<0)][abs(x)];
+
+      for(int x=-(N-1);x<=N-1;++x){
+         int y = x + a[i]-k*b[i];
+         if(abs(y)>=N) continue;
+         dp[i+1][(y<0)][abs(y)] = max(dp[i][(y<0)][abs(y)] , a[i]+dp[i][(x<0)][abs(x)]);
+      }
+   }
+
+   int ans=dp[n][0][0];
+   if(!ans) ans=-1;
+
+   cout << ans << endl;
+
+   return 0;
+
+}
