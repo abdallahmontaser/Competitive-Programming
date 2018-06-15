@@ -29,7 +29,7 @@ bool f1(ld y,ld a,ld b){ // does our segment intersect with the vertical segment
 
 bool f2(ld x,ld a,ld b){ // does our segment intersect with the vertical segment: [(x,a) ; (x,b)] ??
    ld y = ((x-x1)/(x2-x1))*(y2-y1) + y1;
-   f3(y,a,b) && f3(y,y1,y2) && f3(x,x1,x2);
+   return f3(y,a,b) && f3(y,y1,y2) && f3(x,x1,x2);
 }
 
 int main(){
