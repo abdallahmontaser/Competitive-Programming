@@ -16,7 +16,7 @@ using namespace std;
 * and the i-th string isn't reversed.
 * dp[i][1] = same, but when the i-th string is reversed.
 *
-* Editorial: 
+* Editorial: http://codeforces.com/blog/entry/46510
 */
 
 bool vis[2*N];
