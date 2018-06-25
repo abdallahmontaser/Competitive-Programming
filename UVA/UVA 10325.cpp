@@ -12,23 +12,24 @@ const ll N=1000002;
 using namespace std;
 
 /**
-* Still getting WA.
+* Go over all possible subsets, and for each one, if there's an even number of elements in it; add n/lcm(elements) to the final answer
+* otherwise substract it.
+* 
+* lcm(a,b) = a*b / gcd(a,b).
 */
 
 map<ll,ll>M;
-ll n;
+ll n,m;
 vector<ll>a;
 
-void solve(ll i,ld nn,vector<ll>v){
-   if(i==a.size()){
-      ll nn2=nn;
-      M[v.size()] += nn2;
+void solve(ll i,ll nn,ll c){
+   if(i==m){
+      M[c] += n/nn;
       return;
    }
 
-   solve(i+1,nn,v);
-   v.pb(a[i]);
-   solve(i+1,(ld)nn/a[i],v);
+   solve(i+1,nn,c);
+   solve(i+1,nn*a[i]/__gcd(nn,a[i]),c+1);
 }
 
 int main(){
@@ -38,20 +39,12 @@ int main(){
    while(cin >> n){
       M.clear();
       a.clear();
-      ll m; cin >> m;
-      ll tmp_a[m]; for(int i=0;i!=m;++i) cin >> tmp_a[i];
-
-      sort(tmp_a,tmp_a+m);
-
-      for(int i=0;i!=m;++i){
-         ll x=tmp_a[i];
-         bool found=0;
-         for(int j=0;j<a.size();++j) if(x%a[j]==0) found=1;
-         if(!found) a.pb(x);
-      }
+      cin >> m;
+      ll x;
+      for(int i=0;i!=m;++i) cin >> x , a.pb(x);
 
       vector<ll>v;
-      solve(0,(ld)n,v);
+      solve(0,1,0);
 
       ll ans=0;
       for(int i=0;i<=a.size();++i) ans += (i%2==0) ? M[i] : -M[i];
