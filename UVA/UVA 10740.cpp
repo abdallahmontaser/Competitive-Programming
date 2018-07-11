@@ -15,7 +15,7 @@ using namespace std;
 * In the K_th shortest path, every node will be visited at most K times.We can use Dijkstra for this.
 * In usual cases(finding the shortest path) with Dijkstra, we keep a boolean array "vis" to make sure we don't visit any node more than
 * once, that's when K=1(each node visited at most 1 time).So now we make it an int array and keep pushing in our priority queue
-* allowing all nodes a such that vis[a] < k (vis starting from 0) and store the distance in dist[vis[a]][a].
+* allowing all nodes a such that vis[a] < K (vis starting from 0) and store the distance in dist[vis[a]][a].
 * 
 * Finally, the K_th shortest path will be in dist[k-1][y], because although all nodes will be visited at most K times, y will be visited
 * exactly K times by Dijkstra's(put K times in the priority queue).
