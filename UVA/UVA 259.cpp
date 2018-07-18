@@ -17,16 +17,14 @@ using namespace std;
 * So we can try all the possible combinations; there are 10!=3*10^6 ones, and verify if any one of them is possible.Else return "!".
 * Construct the string by adding every letter from 'A' to 'Z' a number of times equal to the number next to that letter in every job description.
 * If the string's size is more than 10 then it's impossible, else keep adding the character "_" until the string's size becomes equal to 10.
+* With binary search in the "possible" function, the maximum number of operations(worst case) can reach 10! * 10 * log2(10).
+* (Solution without binary search passed but it shouldn't have.)
 */
 
 vector<ll>v[26];
 
 bool possible(string&s){
-   for(int i=0;i<s.size();++i) if(s[i]!='_'){
-      bool found=0;
-      for(int j=0;j<v[s[i]-'A'].size();++j) if(v[s[i]-'A'][j] == i) found=1;
-      if(!found) return 0;
-   }
+   for(int i=0;i<s.size();++i) if(s[i]!='_' && !binary_search(v[s[i]-'A'].begin(),v[s[i]-'A'].end(),i)) return 0;
    return 1;
 }
 
@@ -44,14 +42,16 @@ int main(){
          ll i=3;
          while(line[i]!=';') v[line[0]-'A'].pb(line[i]-'0') , ++i;
       }while(getline(cin,line) && line.size());
-
+      
+      for(int i=0;i<26;++i) sort(v[i].begin(),v[i].end());
+      
       string ans="!";
       if(s.size()<=10){
          while(s.size()<10) s+="_";
          sort(s.begin(),s.end());
          do{
             if(possible(s)) ans = s;
-         }while(next_permutation(s.begin(),s.end()));
+         }while(ans == "!" && next_permutation(s.begin(),s.end()));
       }
 
       cout<<ans<<endl;
