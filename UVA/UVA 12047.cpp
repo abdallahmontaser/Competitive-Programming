@@ -82,8 +82,8 @@ int main(){
          e.pb(mp(mp(x,y),c));
       }
 
-      dijkstra(g1,dist1,s,t);
-      dijkstra(g2,dist2,t,s);
+      dijkstra(g1,dist1,s,t); // dist1[i] is dist(s,i)
+      dijkstra(g2,dist2,t,s); // dist2[i] is dist(i,t)
 
       ll ans=-1;
       FOR(k,0,e.size()-1){
