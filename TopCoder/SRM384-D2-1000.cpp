@@ -33,6 +33,8 @@ using namespace std;
 * 
 * Just one thing;
 * if Alan can't win in some pile, the "minimum number of turns for him to win in that pile" will be equal to 1e9(dummy value) a.k.a. infinity.
+* 
+* Editorial for simpler and better solution: https://community.topcoder.com/tc?module=Static&d1=match_editorials&d2=srm384
 */
 
 ll f[10005]; // f[x] is sqrt(x) rounded
