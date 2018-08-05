@@ -42,23 +42,24 @@ using namespace std;
 * Let the numerator be equal to a and the denominator to b, and let the shortest distance between them be equal to d.
 * b is obviously equal to R^d because in each step(edge) you choose one of R numbers(each with equal probability) and add it.
 * a can be calculated using DP - dp[r][d][m] is the number of ways you can get a total cost <= m if there are d steps and you choose one of r numbers in each step.
+* 
 * But since m can reach 10000, this won't work.
 * Unless you notice that the maximum value obtainable by summing d numbers is d*r, so if m > d*r you can set m = d*r.
-* That will give us a dp array having maximum values in each dimention as follows: [30][99][2970]
+* That will give us a dp array having maximum values in each dimention as follows: 30 , 99 , 2970
 *
 * a and b are both very large numbers, so you'll need to use double or long double.
 * 
-* In line 97 I'm dividing by b, but if my answer is <= 0.0009 then I'll stop because my answer will be considered correct by the problem checker(read the output section).
+* In line 98 I'm dividing by b, but if my answer is <= 0.0009 then I'll stop because my answer will be considered correct by the problem checker(read the output section).
 */
 
-ld dp[31][101][3001];
-ll done[31][101][3001];
+ld dp[31][100][2971];
+bool done[31][100][2971];
 ld solve(ll r,ll d,ll m){
     if(d==0 && m>=0) return 1;
     if(d==0 || m<=0) return 0;
 
     ld&ans = dp[r][d][m];
-    ll&dd = done[r][d][m];
+    bool&dd = done[r][d][m];
     if(dd) return ans;
 
     ans=0;
