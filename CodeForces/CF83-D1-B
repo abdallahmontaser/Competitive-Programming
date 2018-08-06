@@ -1,0 +1,111 @@
+#include <iostream>
+#include<iomanip>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <queue>
+#include <deque>
+#include <iterator>
+#include <stack>
+#include <map>
+#include <set>
+#include <numeric>
+#include <limits>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#define MOD 1000000007
+#define EPS 1e-15
+#define ll long long
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define endl '\n'
+#define foreach(it,x) for(__typeof__((x).begin()) it = (x).begin(); it != (x).end(); ++it)
+#define FOR(i,a,b) for(ll i=(ll)(a);i<=(ll)(b);++i)
+#define ROF(i,a,b) for(ll i=(ll)(a);i>=(ll)(b);--i)
+const ld PI=3.141592653589793238L;
+const ll N=100005;
+using namespace std;
+//   <<>>
+
+/**
+* The code isn't clear this time.I'll try my best to explain the approach.
+* It's obvious that if k is equal to the sum of all the elements then the queue will be empty, and if it's greater then we return -1.
+* Now we should go over the array as long as we still have a positive k, and if the current element is positive, we decrease it by 1 and decrease k by 1.
+* Let the position in which k became 0 be i.Print all indices j in [i+1;n] such that a[j] is positive, then print all indices j in [1;i] such that a[j] is positive.
+* How to do this efficiently?
+* 
+* I'm going to ignore my solution and describe a better one using segment tree with lazy propagation.
+* We need to be able to return the number of 0s in an interval and perform a range update on it.
+* 
+* Go over the distinct a[i]s in ascending order and for each one(for i=1 set a[i-1]=0);
+* if k >= (a[i]-a[i-1])*(n-nz)  (nz = current number of 0s in [1;n])
+*       then perform a range update on [1;n] by substracting a[i]-a[i-1] (do not touch the 0s) then substract (a[i]-a[i-1)*(n-nz) from k and proceed to the next number.
+* else if k >= (a[i]-a[i-1]-1)*(n-nz) then we set nb=k%(n-nz) and go through the first nb positive elements in our array.If one of them is equal to a[i]-a[i-1] we set it to 0.
+*       Now we print the indices of positive elements after the first nb positive elements in order, then we come back and print the ones before them(that have positive numbers).
+* else we do the same previous thing but without setting any element to 0.
+*/
+
+map<ll,ll>m;
+
+int main(){
+    ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+
+    ll n,k; cin>>n>>k;
+    ll a[n+1]; FOR(i,1,n) cin>>a[i] , ++m[a[i]];
+
+    vector<pair<ll,ll> >v1;
+    foreach(it,m) v1.pb(*it);
+
+    ll curr=n;
+    vector<ll>v2; v2.pb(curr * v1[0].first) , curr -= v1[0].second;
+    FOR(i,1,v1.size()-1) v2.pb(v2[v2.size()-1] + (v1[i].first-v1[i-1].first)*curr) , curr -= v1[i].second;
+
+    if(k >= v2[v2.size()-1]){
+        if(k > v2[v2.size()-1]) cout<<"-1";
+        cout<<endl;
+        return 0;
+    }
+
+    ll ans;
+    ll i=0,j=v2.size()-1;
+    while(i<=j){
+        ll mid=(i+j)/2;
+        if(k < v2[mid]) ans=mid , j=mid-1;
+        else i=mid+1;
+    }
+
+    ll del=v1[ans].first;
+
+    if(ans) k-=v2[ans-1];
+
+    ll target=v1[ans].first;
+    if(ans) target -= v1[ans-1].first;
+
+    ll sum=0; FOR(i,ans,v1.size()-1) sum+=v1[i].second;
+
+    ll del2=0;
+    if(k > (target-1)*sum) del2=1;
+
+    ll nb = k%sum;
+
+    queue<ll>q;
+    FOR(i,1,n){
+        if(a[i]<del) a[i]=0;
+        else if(nb){
+            if(a[i]==del && del2) a[i]=0;
+            else a[i]=0 , q.push(i);
+            --nb;
+        }
+    }
+
+    FOR(i,1,n) if(a[i]) cout<<i<<' ';
+    while(!q.empty()) cout<<q.front()<<' ' , q.pop();
+
+    return 0;
+}
+
+
+
