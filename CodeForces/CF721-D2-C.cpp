@@ -1,81 +1,68 @@
-#include<bits/stdc++.h>
-#define MOD 1000000007
+#include <bits/stdc++.h>
 #define ll long long
 #define ld long double
+#define ull unsigned long long
 #define pb push_back
 #define mp make_pair
-#define endl '\n'
-#define foreach(it,x) for(__typeof__((x).begin()) it = (x).begin(); it != (x).end(); ++it)
-const ld PI =  3.141592653589793238L;
-const ll N=100002;
+#define F first
+#define S second
+#define sz(x) ((ll)(x).size())
+#define FOR(i,a,b) for(ll i=(ll)(a);i<=(ll)(b);++i)
+#define ROF(i,a,b) for(ll i=(ll)(a);i>=(ll)(b);--i)
+const ld PI = 3.141592653589793238L , EPS = 1e-12L;
+const ll N = 300005 , MOD = 1000000007;
 using namespace std;
 
 /**
 * Editorial: http://codeforces.com/blog/entry/47457
 */
 
-ll n,m,T;
-bool ok[5000],done[5000];
-vector<pair<int,int> >graph[5000];
-vector<pair<int,pair<int,int> > >dp[5000];
+ll n;
+vector<pair<ll,ll>> g[5001];
+ll dp[5001][5001];
 
-vector<pair<int,pair<int,int> > > dfs(int x){
-   if(done[x]) return dp[x];
+ll solve(ll i , ll nb){ // minimum time to go from "i" to "n" and visit nb nodes.
+	if(i == n && nb == 1) return 0;
+	if(i == n || nb == 1) return 2e9;
 
-   vector<pair<int,pair<int,int> > >tmp;
-   if(x==n-1) tmp.pb(mp(0,mp(1,n))) , ok[x]=1;
-   if(!graph[x].size()){
-      done[x]=1;
-      return dp[x] = tmp;
-   }
+	ll &ans = dp[i][nb];
+	if(ans != -1) return ans;
 
-   vector<pair<int,pair<int,int> > >tmp2;
-   for(int i=0;i!=graph[x].size();++i){
-      tmp2 = dfs(graph[x][i].first);
+	ans = 2e9;
+	for(auto j: g[i]) ans = min(ans , j.S + solve(j.F , nb - 1));
 
-      if(!ok[graph[x][i].first]) continue;
-      ok[x]=1;
-
-      for(int j=0;j!=tmp2.size();++j){
-         tmp2[j].first += graph[x][i].second;
-         ++tmp2[j].second.first;
-         tmp2[j].second.second = graph[x][i].first;
-      }
-
-      tmp.insert(tmp.begin(),tmp2.begin(),tmp2.end());
-   }
-
-   done[x]=1;
-   return dp[x]=tmp;
+	return ans;
 }
 
-void dfs2(int x){
-   vector<pair<int,pair<int,int> > >&v = dp[x];
+void print(ll i , ll nb){
+	cout << i << ' ';
+	if(i == n){
+		cout << '\n';
+		return;
+	}
 
-   pair<int,pair<int,int> > ans = mp(0,mp(0,0));
-   foreach(it,v) if((*it).first <= T && ((*it).second).first > ans.second.first) ans=*it;
+	ll nxt;
+	for(auto j: g[i]) if(solve(i , nb) == j.S + solve(j.F , nb - 1)) nxt = j.F;
 
-   if(!x) cout << ans.second.first << endl;
-   cout << x+1;
-   if(x!=n-1) cout << ' ',dfs2(ans.second.second);
+	print(nxt , nb - 1);
 }
 
 int main(){
-   ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-   // <<>>
+    ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+	
+	ll m,t; cin >> n >> m >> t;
+	FOR(i,1,m){
+		ll u,v,w; cin >> u >> v >> w;
+		g[u].pb(mp(v , w));
+	}
 
-   cin >> n >> m >> T;
+	memset(dp,-1,sizeof(dp));
 
-   for(int i=0;i!=m;++i){
-      int u,v,t; cin >> u >> v >> t;
-      if(u==n || v==1) continue;
-      graph[u-1].pb(mp(v-1,t));
-   }
+	ll ans;
+	FOR(i,2,n) if(solve(1 , i) <= t) ans = i;
 
-   dfs(0);
+	cout << ans << '\n';
+	print(1,ans);
 
-   dfs2(0);
-
-   return 0;
-
+    return 0;
 }
