@@ -26,6 +26,7 @@ class MarriageProblemRevised{
 		}
 
 		for(int i = 0; i < n; ++i) if(mask1[(1 << i)] == 0) return -1;
+		for(int j = 0; j < m; ++j) if(mask2[(1 << j)] == 0) return -1;
 
 		int ans = n + m;
 		for(int a = 0; a <= (1 << n) - 1; ++a) for(int b = 0; b <= (1 << m) - 1; ++b){
