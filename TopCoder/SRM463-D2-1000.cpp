@@ -18,7 +18,7 @@ class Nisoku{
 		sort(cards.begin(), cards.end());
 		double ans = 0;
 		
-    for(int nb = 0; nb <= sz(cards); nb += 2){
+    		for(int nb = 0; nb <= sz(cards); nb += 2){
 			
 			double tans = 1.0L;
 			for(int i = 0 , j = nb - 1; i < j; ++i , --j) tans *= cards[i] + cards[j];
