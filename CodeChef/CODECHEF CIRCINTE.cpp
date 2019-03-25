@@ -12,7 +12,7 @@ using namespace std;
 * Here I have an unproven solution.
 * 
 * First binary search on the answer(distance).
-* It is known that if you fix the minimum distance and the starting point(for example in the first interval; [L0 ; R0]
+* It is known that if you fix the minimum distance and the starting point(for example in the first interval; [L0 ; R0])
 * you can fix all the other points' optimal places in the other intervals in this case.
 * 
 *        ** UNPROVEN PART **
