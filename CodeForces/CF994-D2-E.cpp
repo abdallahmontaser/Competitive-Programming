@@ -30,12 +30,12 @@ using namespace std;
 
 map<int,ll> mask1 , mask2;
 
-pair<ll,ll> find(int x){
+pair<ll,ll> find(int y){
 	ll m1 = 0 , m2 = 0;
 
 	for(auto a: mask1)
 		for(auto b: mask2)
-			if((-100 * b.F) - (100 * a.F) == x)
+			if((-100 * b.F) - (100 * a.F) == y)
 				m1 |= a.S , m2 |= b.S;
 		
 	return mp(m1 , m2);
@@ -56,9 +56,9 @@ int32_t main(){
 		int y; cin >> y;
 		mask1[y] |= (1ll << (i - 1));
 	}
-	for(int i = 1; i <= m; ++i){
+	for(int j = 1; j <= m; ++j){
 		int y; cin >> y;
-		mask2[y] |= (1ll << (i - 1));
+		mask2[y] |= (1ll << (j - 1));
 	}
 
 	map<int,pair<ll,ll>> answer;
@@ -67,16 +67,18 @@ int32_t main(){
 		for(auto b: mask2){
 			int i = a.F , j = b.F;
 
-			int x = (-100 * j) - (100 * i);
+			int y = (-100 * j) - (100 * i);
 
-			answer[x] = find(x);
+			answer[y] = find(y);
 		}
 	}
 
-	int ans = 0;
-	for(auto a: answer) for(auto b: answer) ans = max(ans , merge(a.S , b.S));
+	int final_ans = 0;
+	for(auto a: answer)
+		for(auto b: answer)
+			final_ans = max(final_ans , merge(a.S , b.S));
 
-	cout << ans << '\n';
+	cout << final_ans << '\n';
 
     return 0;
 }
