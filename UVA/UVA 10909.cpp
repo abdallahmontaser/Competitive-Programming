@@ -59,5 +59,5 @@ int32_t main(){
 		cout << n << " is the sum of " << n - v[i] << " and " << v[i] << "." << '\n';
 	}
 
-  return 0;
+	return 0;
 }
