@@ -24,7 +24,7 @@ int32_t main(){
               else --x;
         }
 
-        cout << (x != 0 || y != 0) + (x != 0 && y != 0) << '\n';
+        cout << (x != 0) + (y != 0) << '\n';
 
         return 0;
 }
