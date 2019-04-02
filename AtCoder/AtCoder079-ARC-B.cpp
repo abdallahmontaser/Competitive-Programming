@@ -16,7 +16,7 @@ int32_t main(){
 
 	ll k; cin >>k;
   int n = 50;
-	ll a[n + 1]; for(int i = 1; i <= n; ++i) a[i] = k / n  +  i - 1;
+	ll a[n + 1]; for(int i = 1; i <= n; ++i) a[i] = k / n + i - 1;
 
 	k %= n;
 	while(k--){
