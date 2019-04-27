@@ -1,5 +1,6 @@
-// CODE STILL DOESN'T WORK - My algorithm for generating a "valid" graph randomly keeps failing forever, although the probability of
+// CODE STILL DOESN'T WORK - My algorithm for generating a "valid" graph randomly keeps failing, although the probability of
 // it's failure according to the official editorial is low.
+
 /**
 * Problem link: https://codingcompetitions.withgoogle.com/codejam/round/0000000000007707/000000000004ba29
 */
@@ -67,7 +68,7 @@ class graph{
 };
 signed main(){
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	graph g1 = graph(10 , 1);
+	graph g1 = graph(10 , 1); // this keeps on going forever
 	return 0;
 
 	int tc; cin >> tc;
