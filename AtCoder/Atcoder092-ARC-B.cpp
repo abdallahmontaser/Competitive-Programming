@@ -1,8 +1,8 @@
 /**
 * Editorial: https://img.atcoder.jp/arc092/editorial.pdf
-* 
+*  
 * My solution:
-* For each bit, I compute the number of times it appears in the N² numbers and add 2^bit to the final answerif that number is odd(that's XOR)
+* For each bit, I compute the number of times it appears in the N² numbers and add 2^bit to the final answer if that number is odd (that's XOR)
 * If we're at the k_th bit, let's go through all A_i.
 * A_i + B_j gives 1 at the k_th bit iff one of these two statements is true:
 *** Values of A_i and B_j at the k_th bit are different, and the sum of A_i[0..k-1] and B_j[0..k-1] in binary representation is < 2^k
