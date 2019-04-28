@@ -19,7 +19,6 @@
 #define sz(x) (int)(x).size()
 #define all(x) x.begin(),x.end()
 using namespace std;
-//<<>>
 vector<pair<int,int>> v[29][2];
 int nb[29][2];
 signed main(){
@@ -50,7 +49,7 @@ signed main(){
 			bool bb = a[i]&(1<<bit);
 			int y = a[i]&((1<<bit)-1);
             
-            auto it = lower_bound(all(v[bit][bb]), make_pair((1<<bit)-y , 0));
+			auto it = lower_bound(all(v[bit][bb]), make_pair((1<<bit)-y , 0));
 			if(it != v[bit][bb].begin()) t += nb[bit][bb] - (--it)->S;
 			else t += nb[bit][bb];
             
