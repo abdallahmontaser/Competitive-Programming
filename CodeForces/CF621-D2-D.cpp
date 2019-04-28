@@ -3,7 +3,7 @@
 * 
 * My code might be messy, but here's the explanation.
 * First of all; 4 is the same as 3, 8 is the same as 7 and 12 is the same as 11. So we'll ignore them(since we want the smallest index)
-* The numbers are too big to be stored, so we will use logs to compare them since they are too big, but there's a catch(we can't immediatly use log on all of them, read below).
+* The numbers are too big to be stored, so we will use logs to compare them, but there's a catch(we can't immediatly use log on all of them, read below).
 * 
 * I will divide the numbers into three parts, ones that are equal to 1, ones that are bigger than 1 and the rest that are smaller.
 * Basic maths, A^B is
@@ -35,7 +35,7 @@ LD nlog(LD x){
 	return log(x)/log((LD)0.5);
 }
 signed main(){
-  ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	map<int,string> ans;
 	ans[1] = "x^y^z";
 	ans[2] = "x^z^y";
@@ -49,16 +49,16 @@ signed main(){
 
 	LD x,y,z; cin >> x >> y >> z;
 	vector<pair<LD,int>> vx={mp(log(y)+log(z),3) , mp(y*log(z),2) , mp(z*log(y),1)};
-  sort(all(vx),cmp);
-  if(x < (LD)1) reverse(all(vx));
+	sort(all(vx),cmp);
+	if(x < (LD)1) reverse(all(vx));
 	
-  vector<pair<LD,int>> vy={mp(log(x)+log(z),7) , mp(x*log(z),6) , mp(z*log(x),5)};
-  sort(all(vy),cmp);
-  if(y < (LD)1) reverse(all(vy));
+	vector<pair<LD,int>> vy={mp(log(x)+log(z),7) , mp(x*log(z),6) , mp(z*log(x),5)};
+	sort(all(vy),cmp);
+	if(y < (LD)1) reverse(all(vy));
 	
-  vector<pair<LD,int>> vz={mp(log(x)+log(y),11) , mp(x*log(y),10) , mp(y*log(x),9)};
-  sort(all(vz),cmp);
-  if(z < (LD)1) reverse(all(vz));
+	vector<pair<LD,int>> vz={mp(log(x)+log(y),11) , mp(x*log(y),10) , mp(y*log(x),9)};
+  	sort(all(vz),cmp);
+  	if(z < (LD)1) reverse(all(vz));
 
 	vector<pair<LD,int>> sup_1 , inf_1 , one;
 	if(x > (LD)1) sup_1.push_back(vx.back()) , sup_1.back().F += log(log(x));
