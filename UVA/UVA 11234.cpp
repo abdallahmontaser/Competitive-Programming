@@ -1,8 +1,8 @@
 /**
 * Draw the binary tree of the expression, the root will be the last Operator, it's left and right children
 * will be it's left and right operands respectively in the expression. The leaves of the tree will be the lowercase letters(operands).
-* Now with each node in the tree(character in the string) having a "level" (the root's level is 0), loop from the biggest level to 0
-* and for each level print all the characters in it from right to left.
+* Now with each node in the tree(character in the string) having a "level" (the root's level is 0),
+* loop on the levels from the biggest to 0, and print each time all the characters in that level from right to left!
 */
 #include <bits/stdc++.h>
 #define LL long long
