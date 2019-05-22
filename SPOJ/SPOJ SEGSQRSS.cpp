@@ -1,6 +1,6 @@
 /**
 * Solved with segmentTree + lazy propagation.
-* The idea is that if you have the sum of numbers in [i;j] = A_i² + A_i+1² + .... + A_j², and you're adding x,
+* The idea is that if you have the sum of squares numbers in [i;j] = A_i² + A_i+1² + .... + A_j², and you're adding x,
 * you can compute the sum of squares of (A + x)², it will be
 *         sum(a_i²)   +   (j-i+1) * x²   +   2*sum(a_i)*x
 */
