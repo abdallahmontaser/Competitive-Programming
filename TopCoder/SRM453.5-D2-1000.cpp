@@ -6,6 +6,7 @@
 * dp[1][A][B][C] = the maximum product ...
 * I've added the first boolean dimension to ease writing the functions, and to make generalised functions to handle min/max operations
 * like the f() function. The g() function handles overflows.
+* Oh and I ignored all zeroes in the array and handled it at the end. It's simpler that way.
 */
 #include <bits/stdc++.h>
 #define LL long long
@@ -46,16 +47,9 @@ LL solve(vector<int>& v, bool mx, int prv, int cur, int left){
 class TheProduct{
 public:
 	long long maxProduct(vector <int> numbers, int k, int maxDist){
-		memset(dp,-1,sizeof(dp));
 		n=sz(numbers) , d=maxDist;
 		LL ans = solve(numbers,1,n,0,k);
 		if(find(all(numbers),0) != end(numbers)) ans=max(ans,0LL);
 		return ans;
 	}
 };
-
-signed main(){
-freopen("in.txt","r",stdin);
-ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	
-}
