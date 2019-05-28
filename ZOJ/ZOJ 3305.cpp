@@ -1,11 +1,10 @@
 /**
- * Think of DP. The regular dp[cur_pos][mask_so_far], where you loop over the possible masks
- * and choose whether to take the current mask or not, and move to the next position.
+ * Think of DP. The regular dp[cur_pos][mask_so_far], where you loop over the possible masks and choose whether to take
+ * the current mask or not, and move to the next position.
  * That would take O(m*2^n) time and memory.
- * What if you used the memory reduction technique? And looped over masks while updating just
- * dp[masks] ?
- * That would make it O(2^n) memory. And the time will depend on what you're looping on each 
- * time you process a possible mask for a sauce.
+ * 
+ * What if you used the memory reduction technique? And looped over masks while updating just dp[masks] ?
+ * That would make it O(2^n) memory. And the time will depend on what you're looping on each time you process a possible mask for a sauce.
  * You will only need to update the sup_masks of any current mask(like below).
  * Looping over sup_mask/sub_masks of every mask from 0 to 2^n-1 will take O(3^n) which is sufficient.
  *
