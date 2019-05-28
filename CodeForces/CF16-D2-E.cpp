@@ -1,14 +1,14 @@
 /**
 * Old problem, from 2010. There's no editorial, here's the announcement: https://codeforces.com/blog/entry/422
-* Used priority_queue to process the possible masks of fish, in decreasing order of their number(number of set bits in the mask) so
-* that if from a mask A, we can go to mask B(by killing a certain fish in A), A will come before A.
+* Used priority_queue to process the possible masks of fish, in decreasing order of their number in the mask so
+* that if from a mask A, we can go to mask B(by killing a certain fish in A), A will come before B.
 * 
 * All the accepted codes I saw though just looped for the masks, I dont know how that would not create problems.
 * 
-* ans[mask] is the probability that we will reach that mask, that's the reason for lines 33 and 44.
-* Being at a current mask A, we loop over all valid pairs of fish(let this pair be {x,y}, where x eats y) in that mask,
-* and we add a certain probability to the mask B = A without the fish y.
-* That probability will be = (prob(A) * prob(x eats y)) / nb_possible_pairs
+* ans[mask] is the probability that we will reach that mask, that's the reason for lines 39 and 51.
+* Being at a current mask A, we loop over all valid pairs of fish in that mask(let this pair be {x,y}, where x eats y),
+* and we add a certain probability to the mask  B = (A without the fish y).
+* That probability will be = [ prob(A) * prob(x eats y) / nb_possible_pairs ]
 */
 #include <bits/stdc++.h>
 #define LL long long
