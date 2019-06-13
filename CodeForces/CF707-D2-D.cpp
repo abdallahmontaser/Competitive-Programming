@@ -81,8 +81,7 @@ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 		op o; cin>>o.type>>o.a;
 		if(o.type<=2) cin>>o.b;
 		
-		int before=i-1;
-		if(o.type==4) before=o.a;
+		int before = (o.type==4) ? o.a : i-1;
 		
 		g[before].push_back(i), e[{before , i}]=o;
 	}
