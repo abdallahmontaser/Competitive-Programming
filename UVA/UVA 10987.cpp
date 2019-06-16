@@ -28,16 +28,15 @@ signed main(){ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 		int n; cin>>n;
 		loop(i,1,n) loop(j,1,i-1){ cin>>dist[i][j]; dist[j][i]=dist[i][j]; e.push_back({dist[i][j],{i,j}}); }
     
-    /** checking the impossible case  */
-		bool imp=0;
+/**  checking the impossible case  */
+		bool impossible=0;
 		loop(i,1,n) loop(j,1,i-1){
-			loop(k,1,n) if(k!=i && k!=j && dist[i][k]+dist[k][j] < dist[i][j])
-				imp = 1;
+			loop(k,1,n) if(k!=i && k!=j && dist[i][k]+dist[k][j] < dist[i][j]) impossible = 1;
 		}
-		if(imp){ cout<<"Need better measurements.\n"; cout<<'\n'; continue; }
+		if(impossible){ cout<<"Need better measurements.\n\n"; continue; }
 
-		/** removing useless edges       */
-    sort(e.rbegin(),e.rend());
+/**  removing useless edges       */
+		sort(e.rbegin(),e.rend());
 		vector<pair<int,int>> e2;
 		for(auto edge: e){
 			bool rmv=0;
@@ -47,8 +46,8 @@ signed main(){ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 			if(!rmv) e2.push_back({min(i,j),max(i,j)});
 		}
 		
-    /** printing the result         */
-    sort(all(e2));
+/**  printing the result         */
+		sort(all(e2));
 		cout<<sz(e2)<<'\n';
 		for(auto edge: e2) cout<<edge.F<<' '<<edge.S<<' '<<dist[edge.F][edge.S]<<'\n';
 		cout<<'\n';
