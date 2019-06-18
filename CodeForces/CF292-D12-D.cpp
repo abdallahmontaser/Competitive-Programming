@@ -13,15 +13,15 @@
 #define all(x) x.begin(),x.end()
 #define loop(i,a,b) for(int i=a;i<=b;++i)
 #define pool(i,a,b) for(int i=a;i>=b;--i)
-using namespace std; const int N = 10000 + 5, LOG = 9 + 1;
+using namespace std; const int N = 10000 + 5, N2 = 500 + 5, LOG = 9 + 1; 
 
 struct DSU{
-	int rep[N],sz[N];
-	DSU(){ for(int i=1; i<=N; ++i) rep[i]=i ,sz[i]=1; }
+	int rep[N2],sz[N2];
+	DSU(){ for(int i=1; i<=N2; ++i) rep[i]=i ,sz[i]=1; }
 	int find(int x) { return (rep[x]==x) ? x : rep[x] = find(rep[x]); }
 	void unite(int x , int y){
 		x=find(x),y=find(y); if(x==y) return;
-    	sz[x] += sz[y]; rep[y] = x;
+    		sz[x] += sz[y]; rep[y] = x;
 	}
 } L[N],R[N];
 
@@ -34,7 +34,7 @@ signed main(){ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 	loop(i,1,m) L[i]=L[i-1], L[i].unite(e[i].F,e[i].S);
 	pool(i,m,1) R[i]=R[i+1], R[i].unite(e[i].F,e[i].S);
 	
-  int k; cin>>k;
+  	int k; cin>>k;
 	while(k--){
 		int l,r; cin>>l>>r;
 		DSU res = L[l-1];
