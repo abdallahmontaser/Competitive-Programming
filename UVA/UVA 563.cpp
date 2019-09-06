@@ -90,24 +90,26 @@ signed main() {
 	while (tc--) {
 		int n, m, b;
 		cin >> n >> m >> b;
-		set<pair<int, int>> coords;
 
 		DINIC dinic;
 		dinic.s = n * m * 2 + 1, dinic.t = n * m * 2 + 2;
 		loop(i, 1, b) {
 			int x, y;
 			cin >> x >> y;
-			coords.insert(mp(x, y));
 			dinic.addE(dinic.s, (x - 1) * m + y, 1);
 		}
-		loop(x, 1, n) loop(y, 1, m) dinic.addE((x - 1) * m + y, (x - 1) * m + y + n * m, 1);
-		loop(x, 1, n) loop(y, 1, m) loop(z, 0, 3) {
+		loop(x, 1, n) loop(y, 1, m)
+			dinic.addE((x - 1) * m + y, (x - 1) * m + y + n * m, 1);
+		
+		loop(x, 1, n) loop(y, 1, m) loop(z, 0, 3)
 			if (1 <= x + dx[z] && x + dx[z] <= n && 1 <= y + dy[z] && y + dy[z] <= m)
 				dinic.addE((x - 1) * m + y + n * m, (x + dx[z] - 1) * m + y + dy[z], 1);
-		}
-		loop(x, 1, n) loop(y, 1, m) if (x == 1 || y == 1 || x == n || y == m) dinic.addE((x - 1) * m + y + n * m, dinic.t, 1);
+		
+		loop(x, 1, n) loop(y, 1, m)
+			if (x == 1 || y == 1 || x == n || y == m)
+				dinic.addE((x - 1) * m + y + n * m, dinic.t, 1);
 
-		if (sz(coords) == b && b <= 2 * (n + m - 2) && dinic.max_flow() == b)
+		if (dinic.max_flow() == b)
 			cout << "possible\n";
 		else cout<<"not possible\n";
 	}
