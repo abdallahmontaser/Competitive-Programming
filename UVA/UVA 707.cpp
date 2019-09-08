@@ -79,8 +79,8 @@ signed main() {
 			loop(i, 1, t) if (sz(possibleCells[i]) == 1)
 					cout << "Time step " << i << ": The robber has been at " << possibleCells[i].begin()->F << "," << possibleCells[i].begin()->S << ".\n";
 		}
-    else cout << "Nothing known.\n";
+    		else cout << "Nothing known.\n";
 		
-    cout << "\n";
+    		cout << "\n";
 	}
 }
