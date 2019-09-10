@@ -1,5 +1,6 @@
 /**
   * Polygons can be convex and convave, your functions must all work for both.
+  * Ohter solutions: https://github.com/mostafa-saad/MyCompetitiveProgramming/blob/master/UVA/UVA_881.txt
 */
 #include <bits/stdc++.h>
 #define ULL unsigned long long
@@ -62,7 +63,7 @@ signed main() {
 			vector<point> v;
 			LD X, Y;
 			while (iss >> X >> Y) v.push_back(point{X, Y});
-			if (fCMP(polygonArea(v), 0) == -1) reverse(all(v));
+			if (fCMP(polygonArea(v), 0) == -1) reverse(all(v)); // concave polygon detected - made it convex.
 
 			polygons.push_back({id, v});
 		}
