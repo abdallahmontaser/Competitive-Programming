@@ -27,25 +27,24 @@ signed main() {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
-	int n, m;
-	cin >> n >> m;
+	int n, m; cin >> n >> m;
 	set<int> nxt[n + 1];
 	vector<int> order(n);
 	loop(mm, 1, m) {
 		loop(i, 0, n - 1) cin >> order[i];
 
-		loop(i, 0, n - 2) nxt[order[i]].insert(order[i + 1]);
-		nxt[order[n - 1]].insert({1, 2});
-	}
-
-	vector<int> groups;
-	loop(i, 0, n - 1) {
-		int nb = 1;
-		while (sz(nxt[order[i]]) == 1) ++nb, ++i;
-		groups.push_back(nb);
+		loop(i, 0, n - 2) {
+			nxt[order[i]].insert(order[i + 1]);
+			if (sz(nxt[order[i]]) > 1) nxt[order[i]] = {1, 2};
+		}
+		nxt[order[n - 1]] = {1, 2};
 	}
 
 	LL ans = 0;
-	for (int g : groups) ans += 1LL * g * (g + 1) / 2;
+	loop(i, 0, n - 1) {
+		int nb = 1;
+		while (sz(nxt[order[i]]) == 1) ++nb, ++i;
+		ans += 1LL * nb * (nb + 1) / 2;
+	}
 	cout << ans << '\n';
 }
