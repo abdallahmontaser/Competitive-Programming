@@ -15,7 +15,6 @@
 #define sz(x)  (int)(x).size()
 #define all(x) x.begin(), x.end()
 using namespace std;
-#define int long long
 const int N = 100000 + 5, inf = 1e9; const LD EPS = 1e-15;
 
 int nbDigitsPower2(int i) {
@@ -38,7 +37,7 @@ int power2Mod(int p, int mod) {
 }
 /*****************************************************************************************************/
 /*****************************************************************************************************/
-signed main() {
+int main() {
       ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
       int tc; cin >> tc;
       while (tc--) {
@@ -54,7 +53,7 @@ signed main() {
                   int mid = (lo + hi) >> 1;
 
                   LD a = log((LD)2) * (n - 1) - log((LD)10) * (nb - k);
-                  LD b = log(mid);
+                  LD b = log((LD)mid);
                   if (fabs(a - b) < EPS || b < a) second = mid, lo = mid + 1;
                   else hi = mid - 1;
             }
