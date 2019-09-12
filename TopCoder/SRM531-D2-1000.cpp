@@ -33,8 +33,8 @@ struct DSU {
 class KingdomReorganization {
   public:
 	int n;
-	
-  int mst(vector<pair<int, pair<int, int>>> &edges) {
+
+	int mst(vector<pair<int, pair<int, int>>> &edges) {
 		sort(all(edges));
 
 		DSU dsu(n);
@@ -46,9 +46,9 @@ class KingdomReorganization {
 			}
 		return ans;
 	}
-	
-  int value(char c) { return (('A' <= c && c <= 'Z') ? (c - 'A') : (c - 'a' + 26)); }
-  
+
+	int value(char c) { return (('A' <= c && c <= 'Z') ? (c - 'A') : (c - 'a' + 26)); }
+
 	int getCost(vector<string> kingdom, vector<string> build, vector<string> destroy) {
 		n = sz(kingdom);
 
@@ -65,4 +65,3 @@ class KingdomReorganization {
 		return destroyTotal + mst(edges);
 	}
 };
-
