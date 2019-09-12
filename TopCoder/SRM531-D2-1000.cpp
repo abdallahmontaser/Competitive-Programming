@@ -7,7 +7,6 @@
   * will give the answer.
 */
 #include <bits/stdc++.h>
-#define ULL unsigned long long
 #define LL long long
 #define LD long double
 #define F first
@@ -26,7 +25,6 @@ struct DSU {
 	int find(int x) { return (rep[x] == x) ? x : rep[x] = find(rep[x]); }
 	void unite(int x, int y) {
 		x = find(x), y = find(y);
-		if (x == y) return;
 		sz[x] += sz[y];
 		rep[y] = x;
 	}
