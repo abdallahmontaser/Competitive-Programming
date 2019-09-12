@@ -11,7 +11,7 @@
 using namespace std;
 const int N = 100000 + 5, inf = 1e9;
 
-const LD EPS = 1e-9, PI = acos(-1.0);
+const LD EPS = 1e-9;
 #define INF(A, B) (fabs((A) - (B)) > EPS && A < B)
 #define SUP(A, B) (fabs((A) - (B)) > EPS && A > B)
 #define EQU(A, B) (fabs((A) - (B)) < EPS)
@@ -33,31 +33,24 @@ point intersectLines(const point &a, const point &b, const point &c, const point
 	if (EQU(determinant, 0)) return point{0, 0}; // parallel
 	return point{(B2 * C1 - B1 * C2) / determinant, (A1 * C2 - A2 * C1) / determinant};
 }
-point findCircle(point &a, point &b, point &c) { return intersectLines(center(a, b), center(a, b) + perp(b - a), center(a, c), center(a, c) + perp(c - a)); }
+point findCircle(point &a, point &b, point &c) {
+	return intersectLines(center(a, b), center(a, b) + perp(b - a), center(a, c), center(a, c) + perp(c - a));
+}
 
 int nbPoints, nbBorder; // start with n, 0
 point pnts[N], border[3]; // start by shuffling the points
-point C;
-LD R;
+point C; LD R;
 void minEnclosingCircle() {
-	if (nbBorder == 3) {
-		C = findCircle(border[0], border[1], border[2]);
-		R = norm(C - border[0]);
-	}
+	if (nbBorder == 3) { C = findCircle(border[0], border[1], border[2]), R = norm(C - border[0]); }
 
-	else if (nbPoints == 0 && nbBorder <= 1) {
-		C = border[0];
-		R = 0;
-	}
+	else if (nbPoints == 0 && nbBorder <= 1) { C = border[0], R = 0; }
 
-	else if (nbPoints == 0 && nbBorder == 2) {
-		C = (border[0] + border[1]) * 0.5;
-		R = norm(C - border[0]);
-	}
+	else if (nbPoints == 0 && nbBorder == 2) { C = (border[0] + border[1]) * 0.5, R = norm(C - border[0]); }
 
 	else {
 		nbPoints--;
 		minEnclosingCircle();
+
 		if (norm(pnts[nbPoints] - C) > R) {
 			border[nbBorder++] = pnts[nbPoints];
 			minEnclosingCircle();
