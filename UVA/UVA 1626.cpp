@@ -26,21 +26,18 @@ int minChars(int i, int j) {
 }
 void print(int i, int j) {
       int len = j - i + 1;
-
-      if (len <= 0) return;
-      else if (len == 1) {
+      if (len == 0) return;
+      if (len == 1) {
             if (s[i - 1] == '(' || s[i - 1] == ')') cout << "()";
             else cout << "[]";
+            return;
       }
-      else {
-            for (int k = i; k <= j - 1; ++k) if (minChars(i, j) == minChars(i, k) + minChars(k + 1, j)) {
-                        print(i, k); print(k + 1, j); return;
-                  }
 
-            if (match(s[i - 1], s[j - 1]) && minChars(i, j) == minChars(i + 1, j - 1)) {
-                  cout << s[i - 1]; print(i + 1, j - 1); cout << s[j - 1];
-            }
-      }
+      for (int k = i; k <= j - 1; ++k) if (minChars(i, j) == minChars(i, k) + minChars(k + 1, j))
+	      print(i, k), print(k + 1, j); return;
+
+      if (match(s[i - 1], s[j - 1]) && minChars(i, j) == minChars(i + 1, j - 1))
+	      cout << s[i - 1], print(i + 1, j - 1), cout << s[j - 1];
 }
 /**********************************************************/
 int32_t main() {
@@ -50,11 +47,10 @@ int32_t main() {
 
       for (int iii = 2; iii < sz(input); iii += 2) {
             s = input[iii];
-            
-		for (int i = 0; i <= sz(s); ++i) for (int j = 0; j <= sz(s); ++j) dp[i][j] = -1;
-            if (s != "") print(1, sz(s));
-            cout << '\n';
+            for (int i = 0; i <= sz(s); ++i) for (int j = 0; j <= sz(s); ++j) dp[i][j] = -1;
 
+            print(1, sz(s));
+            cout << '\n';
             if (iii + 2 < sz(input)) cout << '\n';
       }
 }
