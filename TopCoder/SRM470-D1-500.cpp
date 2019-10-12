@@ -36,25 +36,24 @@ double countLineCrossings(int n, vector<int> startDot, vector<int> endDot) {
       vector<int> sortedEndDot(all(endDot)); sort(all(sortedEndDot));
 
       int ans1 = 0;
-      for (int i = 0; i < n1; ++i)
-            for (int j = i + 1; j < n1; ++j)
-                  ans1 += (startDot[i] < startDot[j]) ^ (endDot[i] < endDot[j]);
+      for (int i = 0; i < n1; ++i) for (int j = i + 1; j < n1; ++j) 
+            ans1 += (startDot[i] < startDot[j]) ^ (endDot[i] < endDot[j]);
                   
       LD ans2 = 0;
       for (int i = 0; i < n1; ++i) {
             int posStart = find(all(sortedStartDot), startDot[i]) - begin(sortedStartDot) + 1;
             int posEnd = find(all(sortedEndDot), endDot[i]) - begin(sortedEndDot) + 1;
 
-            int upL = startDot[i] - posStart;
-            int upR = (n - startDot[i]) - (n1 - posStart);
-            int downL = endDot[i] - posEnd;
-            int downR = (n - endDot[i]) - (n1 - posEnd);
+            int upLeft = startDot[i] - posStart;
+            int upRight = (n - startDot[i]) - (n1 - posStart);
+            int downLeft = endDot[i] - posEnd;
+            int downRight = (n - endDot[i]) - (n1 - posEnd);
 
-            ans2 += (LD)upL * downR / (LD)n2;
-            ans2 += (LD)upR * downL / (LD)n2;
+            ans2 += (LD)upLeft * downRight / (LD)n2;
+            ans2 += (LD)upRight * downLeft / (LD)n2;
       }
 
-      LD ans3 = 0.25L * n2 * (n2 - 1);
+      LD ans3 = 0.5L * (n2 * (n2 - 1) / 2);
 
       return (LD)ans1 + ans2 + ans3;
 }
