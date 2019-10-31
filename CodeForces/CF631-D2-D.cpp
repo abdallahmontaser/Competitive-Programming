@@ -1,6 +1,7 @@
 /*
   * Editorial: codeforces.com/blog/entry/43551
-*/#include <bits/stdc++.h>
+*/
+#include <bits/stdc++.h>
 #define LL long long
 #define LD long double
 #define all(x) x.begin(), x.end()
