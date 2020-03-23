@@ -1,3 +1,6 @@
 My solutions to some problems on various online judges.
 
-Codeforces handle: GLAYS
+All these were solved under the supervision of Dr. Mostafa Saad: https://github.com/mostafa-saad
+Read about his free supervision here: https://codeforces.com/blog/entry/59131
+
+Codeforces profile: https://codeforces.com/profile/GLAYS
